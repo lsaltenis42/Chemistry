@@ -1,12 +1,4 @@
-print("Hello World is a good day! Hi")
+from pathlib import Path
 
-def hi_med_dig():
-    print("hej med dig")
-
-def hi_med_dig_igen():
-    print("problem")
-def hi_med_dig_igen():
-
-
-def FunctionAdd():
-    print("Numbers")
+p = Path.cwd()
+print(p)
