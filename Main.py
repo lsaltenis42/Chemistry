@@ -1,4 +1,6 @@
+print("Hello World is a good day! Hi")
+
 def hi_med_dig():
     print("hej med dig")
 
-print("End of document")
+def hi_med_dig_igen()
