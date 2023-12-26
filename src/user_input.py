@@ -12,6 +12,24 @@ def classify_molecules(input_reaction):
     
 def get_input():
     user_input = str(input("enter a reaction"))
+    elements = user_input.split(" ")
+    
+    marked_character = ""
+    for element in elements:
+        for character in element: 
+            if character.isupper():
+                marked_character += "@" + character
+            else:
+                marked_character += character
+        
+        atoms = marked_character.split("@").remove("")
+        print(atoms)
+    
+                
+
+
+            
+
     user_input.replace(" ","")
    
     arrow_types = [["--><-", 5], ["-><--", 5], ["-><-", 4], ["->", 2], ["<-", 2]]
@@ -30,7 +48,7 @@ def get_input():
         print(products)
     else:
         reactants = user_input.split("+")
-        products = NULL
+        products = None
         reaction_arrow = None
         print(reactants)
 

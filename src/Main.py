@@ -4,5 +4,5 @@ import user_input
 
 current_path = os.getcwd()
 sys.path.insert(0,f'{current_path}//objects')
-print(user_input.get_input())
+user_input.get_input()
 
