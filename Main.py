@@ -5,3 +5,8 @@ def hi_med_dig():
 
 def hi_med_dig_igen():
     print("problem")
+def hi_med_dig_igen():
+
+
+def FunctionAdd():
+    print("Numbers")
