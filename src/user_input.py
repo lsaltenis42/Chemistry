@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import os
 import sys
 
@@ -8,7 +7,8 @@ sys.path.insert(0,f'{current_path}//objects')
 from arrow import (arrow,arrow_info)
 from reaction import reaction
 
-classify_molecules(input_reaction)
+def classify_molecules(input_reaction):
+    print(input_reaction)
     
 def get_input():
     user_input = str(input("enter a reaction"))
@@ -31,7 +31,7 @@ def get_input():
     else:
         reactants = user_input.split("+")
         products = NULL
-        reaction_arrow = NULL
+        reaction_arrow = None
         print(reactants)
 
     input_reaction = reaction(reactants,reaction_arrow,products)
