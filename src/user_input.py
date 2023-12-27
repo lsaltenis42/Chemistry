@@ -26,14 +26,14 @@ def get_input():
                 linker_to_append = linker(potential_linker)
                 reaction_scheme.append(linker_to_append)
                 checked = True
-            break
+                break
 
         for potential_arrow in arrow.arrow_types:
             if not checked and reagent == potential_arrow: 
                 arrow_to_append = arrow(potential_arrow)
                 reaction_scheme.append(arrow_to_append)
                 checked = True            
-            break 
+                break 
         
         if not checked:
             if is_organic(reagent): 
@@ -53,6 +53,8 @@ def get_input():
                         atoms.remove("")
                 
                 reaction_scheme.append(molecule(str(reagent), "inorganic", atoms))
+    #print(reaction_scheme[3].type)
+
 
 #Determines whether molecule is organic based on length-criteria
 #Assumes input is given in symbolic form, i.e. CO_2 not carbondioxide
@@ -69,7 +71,6 @@ def is_organic(reagent):
     
     if length_of_longest_substring > 2:
         return True
-
 
             
 """
@@ -99,3 +100,4 @@ def is_organic(reagent):
     return
 
 """
+get_input()
