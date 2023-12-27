@@ -1,9 +1,4 @@
 from enum import Enum
-"""
-class arrow_info(Enum):
-    TYPE = 0
-    SIZE = 1
-"""
     
 class arrow:
     arrow_types = ["--><-","-><--","-><-","->","<-"]

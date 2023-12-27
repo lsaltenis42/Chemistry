@@ -5,13 +5,13 @@ import sys
 current_path = os.getcwd()
 sys.path.insert(0,f'{current_path}//objects')
 
+#Imports objects 
 from arrow import arrow
 from linker import linker
+from molecule import molecule
 from reaction import reaction
 
-def classify_molecules(input_reaction):
-    print(input_reaction)
-    
+#Processes input into a list of objects 
 def get_input():
     reaction_scheme = []
 
@@ -20,26 +20,27 @@ def get_input():
 
     for reagent in reagents:
         checked = False
-        print("-")
         
         for potential_linker in linker.linker_types:
-            if not checked and reagent == linker:
+            if not checked and reagent == potential_linker:
                 linker_to_append = linker(potential_linker)
-                reaction_scheme.append(linker_to_append())
-                print("It's a plus")
+                reaction_scheme.append(linker_to_append)
                 checked = True
             break
 
         for potential_arrow in arrow.arrow_types:
             if not checked and reagent == potential_arrow: 
                 arrow_to_append = arrow(potential_arrow)
-                reaction_scheme.append(arrow_to_append())
+                reaction_scheme.append(arrow_to_append)
                 checked = True            
             break 
         
         if not checked:
             if is_organic(reagent): 
-                #Organic script
+                #Organic script or alternatively, 
+                #send the name to the object, 
+                #which processes the moleculer
+                reaction_scheme.append(molecule(str(reagent), "organic"))
                 break
             else:
                 marked_character = ""
@@ -49,9 +50,13 @@ def get_input():
                     else:
                         marked_character += character
                         atoms = marked_character.split("@")
+                        atoms.remove("")
                 
-                print(atoms)
-    
+                reaction_scheme.append(molecule(str(reagent), "inorganic", atoms))
+
+#Determines whether molecule is organic based on length-criteria
+#Assumes input is given in symbolic form, i.e. CO_2 not carbondioxide
+
 def is_organic(reagent):
     length_of_longest_substring = 0 
     current_longest = 0
@@ -64,10 +69,6 @@ def is_organic(reagent):
     
     if length_of_longest_substring > 2:
         return True
-        
-
-
-    
 
 
             
@@ -98,5 +99,3 @@ def is_organic(reagent):
     return
 
 """
-
-get_input()

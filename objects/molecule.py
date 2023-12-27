@@ -3,6 +3,9 @@ class molecule:
         self.name = name
         self.type = type
         self.atoms = atoms
+    
+    def hi(self):
+        print("hi")
 
 
 
