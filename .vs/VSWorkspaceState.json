@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\objects",
+    "\\src"
   ],
-  "SelectedNode": "\\test.py",
+  "SelectedNode": "\\objects\\arrow.py",
   "PreviewInSolutionExplorer": false
 }
