@@ -237,32 +237,4 @@ def is_organic(reagent):
     if length_of_longest_substring > 2:
         return True
 
-            
-"""
-    user_input.replace(" ","")
-   
-    arrow_types = [["--><-", 5], ["-><--", 5], ["-><-", 4], ["->", 2], ["<-", 2]]
-    arrow_index = -1
-
-    for arrow_type in arrow_types:
-        arrow_index = user_input.find(arrow_type[arrow_info.TYPE.value])
-        if arrow_index != -1:
-            reaction_arrow = arrow(arrow_type, arrow_index)
-            break
-    
-    if arrow_index != -1:
-        reactants = user_input[:reaction_arrow.index].split("+")
-        products = user_input[reaction_arrow.index+reaction_arrow.length:].split("+")
-    else:
-        reactants = user_input.split("+")
-        products = None
-        reaction_arrow = None
-
-    input_reaction = reaction(reactants,reaction_arrow,products)
-    
-    classify_molecules(input_reaction)
-
-    return
-
-"""
 get_input()
