@@ -3,8 +3,6 @@ import os
 import sys
 from unittest.util import unorderable_list_difference
 
-#from macpath import split
-
 #Makes contents of objects file accessible
 current_path = os.getcwd()
 sys.path.insert(0,f'{current_path}//objects')
@@ -161,6 +159,7 @@ def configure_input(user_input):
     else: user_input = user_input.replace(" ","")
     print(user_input)
     """    
+
 #Processes input into a list of objects 
 def get_input():
     arrows = []

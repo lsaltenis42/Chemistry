@@ -1,5 +1,3 @@
-from enum import Enum
-   
 class arrow:
     placement = {"before" : 0, "after": 1}
     arrow_types = [{"style": "--><-", "length": 5},
