@@ -173,56 +173,7 @@ def get_input():
     user_input = store_arrows(user_input, arrows)
     #store_linkers_and_molecules(user_input, reaction_scheme, arrows)
     
-        
-
-            
-                
-
-
-    """
-    reagents = user_input.split(" ")
-
-    for reagent in reagents:
-        checked = False
-        
-        for potential_linker in linker.linker_types:
-            if not checked and reagent == potential_linker:
-                linker_to_append = linker(potential_linker)
-                reaction_scheme.append(linker_to_append)
-                checked = True
-                break
-
-        for potential_arrow in arrow.arrow_types:
-            if not checked and reagent == potential_arrow: 
-                arrow_to_append = arrow(potential_arrow)
-                reaction_scheme.append(arrow_to_append)
-                checked = True            
-                break 
-        
-        if not checked:
-            if is_organic(reagent): 
-                #Organic script or alternatively, 
-                #send the name to the object, 
-                #which processes the moleculer
-                reaction_scheme.append(molecule(str(reagent), "organic"))
-                break
-            else:
-                marked_character = ""
-                for character in reagent: 
-                    if character.isupper():
-                        marked_character += "@" + character
-                    else:
-                        marked_character += character
-                        atoms = marked_character.split("@")
-                        atoms.remove("")
-                
-                reaction_scheme.append(molecule(str(reagent), "inorganic", atoms))
-    print(reaction_scheme)
-
-"""
 #Determines whether molecule is organic based on length-criteria
-#Assumes input is given in symbolic form, i.e. CO_2 not carbondioxide
-
 def is_organic(reagent):
     length_of_longest_substring = 0 
     current_longest = 0
