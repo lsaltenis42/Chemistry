@@ -1,7 +1,7 @@
 from dataclasses import replace
 import os
 import sys
-from unittest.util import unorderable_list_difference
+#from unittest.util import unorderable_list_difference
 
 #Makes contents of objects file accessible
 current_path = os.getcwd()
