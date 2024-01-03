@@ -8,3 +8,5 @@ def get_period(atomic_number):
         
         return period
 """
+a = "Hello World!"
+print(a[0:len(a)-1])

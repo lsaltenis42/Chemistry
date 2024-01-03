@@ -30,32 +30,34 @@ def store_arrows(user_input, arrows):
                 before_caption = user_input[second_quotation_mark_index:arrow_start_index]
                 arrow_start_index = second_quotation_mark_index
 
-            if arrow_end_index < len(user_input) and user_input[arrow_end_index+1] == "\"": #Checks if caption exists after arrow
+            if arrow_end_index < len(user_input) -1 and user_input[arrow_end_index+1] == "\"": #Checks if caption exists after arrow
                 sub_string = user_input[arrow_end_index+2:]
                 second_quotation_mark_index = arrow_end_index+2 + sub_string.index("\"")
-                after_caption = user_input[arrow_end_index+1:second_quotation_mark_index]
+                after_caption = user_input[arrow_end_index+1:second_quotation_mark_index+1]
                 arrow_end_index = second_quotation_mark_index
 
             arrow_to_append = arrow(potential_arrow["style"], arrow_start_index, before_caption, after_caption)
             arrows.append(arrow_to_append)
+            print(f"Start:{arrow_start_index}, End:{arrow_end_index}, Last index:{len(user_input)-1}, UserInput:{user_input}")
             configured_substring = user_input[arrow_start_index:arrow_end_index].replace(user_input[arrow_start_index:arrow_end_index],"$")
-            user_input = user_input[:arrow_start_index] + configured_substring + user_input[arrow_end_index:]
-            
-            
-
+            user_input = user_input[:arrow_start_index] + configured_substring + user_input[arrow_end_index+1:]
+    
+    #What does this do? The indexes returned by caption_index_range() don't match the positions in user_input.
     for i, item in enumerate(arrows):
         for j in arrows:
             caption_range = j.caption_index_range()
             if (item.index > caption_range["before"]["start_index"] and item.index < caption_range["before"]["end_index"]) or (item.index > caption_range["after"]["start_index"] and item.index < caption_range["after"]["end_index"]):
                 arrows.pop(i)
     
-    for n in arrows:
-        print(n.type)
-        print(n.index)
-        print(n.caption["before"])
-        print(n.caption["after"])
+    for arrow_number, itterated_arrow in enumerate(arrows):
+        print("\n________________________________")
+        print(f"Arrow_number:{arrow_number}")
+        print("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾")
+        print(f"|Arrow type:{itterated_arrow.type}\n|Index:{itterated_arrow.index}\n|Before caption:{itterated_arrow.caption["before"]}\n|After caption:{itterated_arrow.caption["after"]}")
+    
     
     return user_input
+
 """
 def store_arrows(user_input, arrows):
     for potential_arrow in arrow.arrow_types:
