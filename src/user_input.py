@@ -17,6 +17,7 @@ def store_arrows(user_input, arrows):
     for potential_arrow in arrow.arrow_types:
         arrow_start_index = 0
         occurrences = user_input.count(potential_arrow["style"])
+        
         for _ in range(occurrences):
             arrow_start_index = user_input.index(potential_arrow["style"])
             arrow_end_index = arrow_start_index + potential_arrow["length"]-1
@@ -24,7 +25,7 @@ def store_arrows(user_input, arrows):
             after_caption = ""
             
             if user_input[arrow_start_index-1] == "\"": #Checks if caption exists before arrow
-                sub_string = user_input[:arrow_start_index-1]
+                sub_string = user_input[:arrow_start_index-1] 
                 sub_string = sub_string[::-1] #sub_string is reversed
                 second_quotation_mark_index = arrow_start_index - 1 - get_best_match(sub_string) - 1 #Used to say: second_quotation_mark_index = arrow_start_index - 1 - sub_string.index("\"") - 1
                 before_caption = user_input[second_quotation_mark_index:arrow_start_index] #Double quotation marks in results can be fixed by adding and subtracting 1
@@ -165,7 +166,8 @@ def get_input():
     arrows = []
     reaction_scheme = []
 
-    user_input = str(input("enter a reaction")).replace("\\\"","@")
+    user_input = str(input("enter a reaction")).replace(" ","")
+    
     if user_input.count("\"") % 2 != 0:
         print("invalid input")
 
@@ -173,20 +175,6 @@ def get_input():
     user_input = store_arrows(user_input, arrows)
     #store_linkers_and_molecules(user_input, reaction_scheme, arrows)
     
-#Determines whether molecule is organic based on length-criteria
-def is_organic(reagent):
-    length_of_longest_substring = 0 
-    current_longest = 0
-    for character in reagent:
-        if character.isalpha() and character.islower():
-            current_longest += 1
-        else:
-            length_of_longest_substring = current_longest
-            current_longest = 0
-    
-    if length_of_longest_substring > 2:
-        return True
-
 #Finds the most likely end quotation mark by scanning for a second arrow, 
 #and preferably choosing the last available quotation mark.
 #Still needs to be implemented for captions after the arrow.
@@ -214,6 +202,21 @@ def get_best_match(sub_string):
                 best_match = index
     print(best_match)
     return int(best_match)
+
+#Determines whether molecule is organic based on length-criteria
+def is_organic(reagent):
+    length_of_longest_substring = 0 
+    current_longest = 0
+    for character in reagent:
+        if character.isalpha() and character.islower():
+            current_longest += 1
+        else:
+            length_of_longest_substring = current_longest
+            current_longest = 0
+    
+    if length_of_longest_substring > 2:
+        return True
+
     
 
 get_input()
