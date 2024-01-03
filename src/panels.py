@@ -12,7 +12,7 @@ window.geometry(f"{window_width}x{window_height}")
 print(window_width)
 
 standard_settings = {"bond_length" : 10,
-                       "atom_size" : 5
+                       "atom_size" : 5 
                     }
 
 def create_input_panel():
@@ -52,12 +52,18 @@ def draw_atom(atom):
     """"""
 
 def draw_reactionscheme():
+    #Coordinates originate in the top left corner with x increasing to the right, and y increasing down.
     canvas_width = int(window_width*75/100)
     canvas_height= int(window_height*87/100)
     canvas = Canvas(window, width=canvas_width, height=canvas_height, background='white')
     canvas.grid(column=1, row=0, rowspan= 10)
 
-    
+    initial_x = canvas_width/20
+    initial_y = canvas_height/2
+
+    canvas.create_line(10, 10, 200, 50, fill='red', width=3)
+
+
     
 create_settings_panel()
 create_input_panel()

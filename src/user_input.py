@@ -26,8 +26,8 @@ def store_arrows(user_input, arrows):
             if user_input[arrow_start_index-1] == "\"": #Checks if caption exists before arrow
                 sub_string = user_input[:arrow_start_index-1]
                 sub_string = sub_string[::-1] #sub_string is reversed
-                second_quotation_mark_index = arrow_start_index - 1 - sub_string.index("\"") - 1
-                before_caption = user_input[second_quotation_mark_index:arrow_start_index]
+                second_quotation_mark_index = arrow_start_index - 1 - get_best_match(sub_string) - 1 #Used to say: second_quotation_mark_index = arrow_start_index - 1 - sub_string.index("\"") - 1
+                before_caption = user_input[second_quotation_mark_index:arrow_start_index] #Double quotation marks in results can be fixed by adding and subtracting 1
                 arrow_start_index = second_quotation_mark_index
 
             if arrow_end_index < len(user_input) -1 and user_input[arrow_end_index+1] == "\"": #Checks if caption exists after arrow
@@ -38,11 +38,10 @@ def store_arrows(user_input, arrows):
 
             arrow_to_append = arrow(potential_arrow["style"], arrow_start_index, before_caption, after_caption)
             arrows.append(arrow_to_append)
-            print(f"Start:{arrow_start_index}, End:{arrow_end_index}, Last index:{len(user_input)-1}, UserInput:{user_input}")
-            configured_substring = user_input[arrow_start_index:arrow_end_index].replace(user_input[arrow_start_index:arrow_end_index],"$")
+            configured_substring = user_input[arrow_start_index:arrow_end_index].replace(user_input[arrow_start_index:arrow_end_index],"$")#Why not just "$"?
             user_input = user_input[:arrow_start_index] + configured_substring + user_input[arrow_end_index+1:]
     
-    #What does this do? The indexes returned by caption_index_range() don't match the positions in user_input.
+    #What does this do?
     for i, item in enumerate(arrows):
         for j in arrows:
             caption_range = j.caption_index_range()
@@ -55,37 +54,7 @@ def store_arrows(user_input, arrows):
         print("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾")
         print(f"|Arrow type:{itterated_arrow.type}\n|Index:{itterated_arrow.index}\n|Before caption:{itterated_arrow.caption["before"]}\n|After caption:{itterated_arrow.caption["after"]}")
     
-    
-    return user_input
-
-"""
-def store_arrows(user_input, arrows):
-    for potential_arrow in arrow.arrow_types:
-        arrow_start_index = 0
-        occurrences = user_input.count(potential_arrow["first_part"])
-        if occurrences != 0:
-            for _ in range(occurrences):
-                arrow_start_index = user_input[arrow_start_index:].index(potential_arrow["first_part"])
-                caption_start_index = arrow_start_index+potential_arrow["caption_start_index"]
-                try:
-                    caption_end_index = user_input.index(potential_arrow["last_part"],arrow_start_index)
-                except :
-                    continue
-                
-                arrow_type = potential_arrow["first_part"]+potential_arrow["last_part"]
-                caption = user_input[caption_start_index:caption_end_index].strip()
-                current_arrow = arrow(arrow_type, caption, arrow_start_index)
-                arrow_end_index = caption_end_index + potential_arrow["lenght_after_caption"]
-                arrow_length = arrow_end_index - arrow_start_index
-                try:
-                    store_arrows(user_input[caption_start_index:caption_end_index], arrows).index("@")
-                except:
-                    user_input = user_input.replace(user_input[arrow_start_index:arrow_end_index], "@") 
-                    arrows.append(current_arrow)
-                
-                
-    arrows.sort(key = lambda element:element.index)
-
+    print(user_input)
     return user_input
 
 def store_linkers_and_molecules(user_input, reaction_scheme, arrows):
@@ -133,8 +102,37 @@ def store_linkers_and_molecules(user_input, reaction_scheme, arrows):
                 reaction_scheme.append(molecule(str(component), "inorganic", atoms))
 
     print(reaction_scheme)
-    """
 
+"""
+def store_arrows(user_input, arrows):
+    for potential_arrow in arrow.arrow_types:
+        arrow_start_index = 0
+        occurrences = user_input.count(potential_arrow["first_part"])
+        if occurrences != 0:
+            for _ in range(occurrences):
+                arrow_start_index = user_input[arrow_start_index:].index(potential_arrow["first_part"])
+                caption_start_index = arrow_start_index+potential_arrow["caption_start_index"]
+                try:
+                    caption_end_index = user_input.index(potential_arrow["last_part"],arrow_start_index)
+                except :
+                    continue
+                
+                arrow_type = potential_arrow["first_part"]+potential_arrow["last_part"]
+                caption = user_input[caption_start_index:caption_end_index].strip()
+                current_arrow = arrow(arrow_type, caption, arrow_start_index)
+                arrow_end_index = caption_end_index + potential_arrow["lenght_after_caption"]
+                arrow_length = arrow_end_index - arrow_start_index
+                try:
+                    store_arrows(user_input[caption_start_index:caption_end_index], arrows).index("@")
+                except:
+                    user_input = user_input.replace(user_input[arrow_start_index:arrow_end_index], "@") 
+                    arrows.append(current_arrow)
+                
+                
+    arrows.sort(key = lambda element:element.index)
+
+    return user_input
+"""
 
 """                      
 def configure_input(user_input):
@@ -188,5 +186,34 @@ def is_organic(reagent):
     
     if length_of_longest_substring > 2:
         return True
+
+#Finds the most likely end quotation mark by scanning for a second arrow, 
+#and preferably choosing the last available quotation mark.
+#Still needs to be implemented for captions after the arrow.
+def get_best_match(sub_string):
+    best_match = sub_string.index("\"")
+
+    if sub_string.count("\"") > 1:
+        furthest_arrow_index = len(sub_string)-1
+        for potential_reverse_arrow in arrow.arrow_types:
+            reversed_arrow = potential_reverse_arrow["style"][::-1]
+            if reversed_arrow in sub_string:
+                if sub_string.index(reversed_arrow) < furthest_arrow_index:
+                    furthest_arrow_index= sub_string.index(reversed_arrow)            
+    
+        list_of_quotation_indexes = []
+        for char_index, char in enumerate(sub_string):
+            if char == "\"": 
+                list_of_quotation_indexes.append(char_index)
+
+        smallest_difference = len(sub_string) - 1 
+                    
+        for index in list_of_quotation_indexes:
+            if abs(index - furthest_arrow_index) < smallest_difference:
+                smallest_difference = abs(index - furthest_arrow_index)
+                best_match = index
+    print(best_match)
+    return int(best_match)
+    
 
 get_input()
