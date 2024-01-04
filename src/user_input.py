@@ -58,7 +58,6 @@ def store_arrows(user_input, arrows):
     print(user_input)
     return user_input
 
-"""
 def store_linkers_and_molecules(user_input, reaction_scheme, arrows):
     i = 0
     user_input_length = len(user_input)
@@ -104,7 +103,7 @@ def store_linkers_and_molecules(user_input, reaction_scheme, arrows):
                 reaction_scheme.append(molecule(str(component), "inorganic", atoms))
 
     print(reaction_scheme)
-"""
+
 """
 def store_arrows(user_input, arrows):
     for potential_arrow in arrow.arrow_types:

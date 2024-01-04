@@ -51,6 +51,9 @@ def draw_bond(start_atom, end_atom):
 def draw_atom(atom):
     """"""
 
+def draw_molecule():
+    
+
 def draw_reactionscheme():
     #Coordinates originate in the top left corner with x increasing to the right, and y increasing down.
     canvas_width = int(window_width*75/100)
@@ -60,7 +63,7 @@ def draw_reactionscheme():
 
     initial_x = canvas_width/20
     initial_y = canvas_height/2
-
+    
     canvas.create_line(10, 10, 200, 50, fill='red', width=3)
 
 
