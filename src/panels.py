@@ -52,6 +52,7 @@ def draw_atom(atom):
     """"""
 
 def draw_molecule():
+    """"""
     
 
 def draw_reactionscheme():
