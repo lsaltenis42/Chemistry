@@ -37,6 +37,7 @@ functional_group_indicators = {
     "azido": "azide",
     "nitro": "nitro compound",
     "oic acid" : "carboxylic acid",
+    "carbonic acid" : "carboxylic acid",
     "ate": "ester",
     "amide": "amide",
     "al": "carbonyl",
@@ -50,6 +51,7 @@ functional_group_indicators = {
     "ane": "alkane",
     "benzene": "arene",
     "nitrile": "nitrile",
+    "cyclo": "cyclic"
 }
 numbering_prefixes_for_chains = {
     "meth":1,
@@ -72,13 +74,13 @@ numbering_prefixes_for_groups = {
     "do": 2,
     "tri": 3,
     "prop":3,
-    "tetra": 4,
+    "tetr": 4,
     "but": 4,
-    "penta": 5, 
-    "hexa": 6, 
-    "hepta": 7, 
-    "octa": 8,
-    "nona": 9,
+    "pent": 5, 
+    "hex": 6, 
+    "hept": 7, 
+    "oct": 8,
+    "non": 9,
     }
 numbering_prefixes_for_chains_tens = {
     "deca": 10,
@@ -99,12 +101,15 @@ functional_group_prefixes = {
     "phenyl": "arene",
     "cyano": "nitrile",
     "azido": "azide",
-    "nitro": "nitro compound"
+    "nitro": "nitro compound",
+    "cyclo":"cyclic"
+
 }
 """
 """
 functional_group_suffixes = {
     "oic acid" : "carboxylic acid",
+    "carbonic acid": "carboxylic acid",
     "ate": "ester",
     "amide": "amide",
     "al": "aldehyde",
@@ -144,8 +149,19 @@ class molecule:
                 if indicator in sub_string:
                     if len(positions) == 0:
                         positions.append(1)
-                    groups_in_molecule.append(functional_group(functional_group_indicators[indicator], positions))
-                    positions = []                    
+    
+                    if indicator == "yl":
+                        for alkyl_prefix in numbering_prefixes_for_chains:
+                            if alkyl_prefix + indicator in sub_string:
+                                groups_in_molecule.append(functional_group(functional_group_indicators[alkyl_prefix+indicator], positions, ""))
+                                positions = [] 
+                    elif "cyclo" in sub_string:
+                        groups_in_molecule.append(functional_group(functional_group_indicators[indicator], positions, sub_string))
+                        positions = []  
+                    else: 
+                        groups_in_molecule.append(functional_group(functional_group_indicators[indicator], positions, ""))
+                        positions = [] 
+                                     
                 for potential_longest_chain in numbering_prefixes_for_chains:
                     if potential_longest_chain in sub_string:                            
                         longest_chain = numbering_prefixes_for_chains[potential_longest_chain]
@@ -158,6 +174,6 @@ class molecule:
         
         return groups_in_molecule
 
-my_molecule = molecule("1,2-dichloro-3-aminobutanoic acid")
+my_molecule = molecule("2,2-dichloro-4-cyclobutylbutanoic acid")
 my_molecule.process_molecule()
 
