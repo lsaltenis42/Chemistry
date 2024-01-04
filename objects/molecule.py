@@ -4,8 +4,7 @@ functional_groups = {
     "carboxylic acid":{"rep":"C(--O)O"},
     "ester":{"rep":"C(--O)O"},
     "amide":{"rep":"C(--O)N"},
-    "aldehyde":{"rep":"C(--O)"},
-    "ketone":{"rep":"C(--O)"},
+    "carbonyl":{"rep":"C(--O)"},
     "alcohol":{"rep":"CO"},
     "thiol":{"rep":"S"},
     "amine":{"rep":"N"},
@@ -23,6 +22,7 @@ functional_groups = {
     "nitro group": {"rep":"N(--O)O"}
     }
 functional_group_indicators = {
+    "oxo": "carbonyl",
     "hydroxy": "alcohol",
     "amino": "amine",
     "oxy": "ether", 
@@ -39,8 +39,8 @@ functional_group_indicators = {
     "oic acid" : "carboxylic acid",
     "ate": "ester",
     "amide": "amide",
-    "al": "aldehyde",
-    "one": "ketone",
+    "al": "carbonyl",
+    "one": "carbonyl",
     "ol": "alcohol",
     "thiol": "thiol",
     "amine": "amine",
@@ -86,6 +86,7 @@ numbering_prefixes_for_chains_tens = {
 }
 """
 functional_group_prefixes = {
+    "oxo":"carbonyl",
     "hydroxy": "alcohol",
     "amino": "amine",
     "oxy": "ether", 
