@@ -153,7 +153,7 @@ class molecule:
                     if indicator == "yl":
                         for alkyl_prefix in numbering_prefixes_for_chains:
                             if alkyl_prefix + indicator in sub_string:
-                                groups_in_molecule.append(functional_group(functional_group_indicators[alkyl_prefix+indicator], positions, ""))
+                                #groups_in_molecule.append(functional_group(functional_group_indicators[alkyl_prefix+indicator], positions, ""))
                                 positions = [] 
                     elif "cyclo" in sub_string:
                         groups_in_molecule.append(functional_group(functional_group_indicators[indicator], positions, sub_string))
