@@ -13,6 +13,8 @@ function addOne(x){
 
 let a = [];
 
+
+
 a.push(1,2,3)
 
 let points = [
@@ -36,7 +38,7 @@ points.getDistance = function(){
  *@param {number} x A numeric expresion
  *@param {number} sigfigs A numeric expresion
  */
-/*
+
 function getRoundedToSigFigs(x, sigfigs){
     let intPart = Math.trunc(x);
     let floatPart = x - intPart;
@@ -55,6 +57,6 @@ function getRoundedToSigFigs(x, sigfigs){
     }
     
 }
-*/
+
 //console.log(getRoundedToSigFigs(0.34567, 1));
 console.log(points.getDistance())
