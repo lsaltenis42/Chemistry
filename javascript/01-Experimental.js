@@ -1,8 +1,12 @@
 let atom = {
+    constructor: function(radius){
+        this.radius = radius
+    },
     xPos: 0,
     yPos: 0,
     name: "",
-    bonds:{}
+    bonds:{},
+    
 }
 
 console.log(atom.bonds?.firstBond);
@@ -34,7 +38,7 @@ points.getDistance = function(){
 }
 
 /** 
- *@description Returns the number rounded to the specified number og significant figures or error message.
+ *@returns Returns the number rounded to the specified number og significant figures or error message.
  *@param {number} x A numeric expresion
  *@param {number} sigfigs A numeric expresion
  */
@@ -55,7 +59,6 @@ function getRoundedToSigFigs(x, sigfigs){
         floatPart = Math.round(floatPart);  
         return (intPart * Math.pow(10,scalingFactor) + floatPart)/Math.pow(10,scalingFactor)
     }
-    
 }
 
 //console.log(getRoundedToSigFigs(0.34567, 1));
