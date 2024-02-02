@@ -8,6 +8,8 @@ function createAtom(){
     }
 }
 
+atom1 = createAtom();
+
 console.log(atom.bonds?.firstBond);
 
 function addOne(x){
