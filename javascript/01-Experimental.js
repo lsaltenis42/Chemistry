@@ -1,5 +1,6 @@
-function createAtom(){
+function createAtom(radius){
     return {
+        radius:radius,
         xPos: 0,
         yPos: 0,
         name: "",
