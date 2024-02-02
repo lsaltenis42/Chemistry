@@ -1,12 +1,11 @@
-let atom = {
-    constructor: function(radius){
-        this.radius = radius
-    },
-    xPos: 0,
-    yPos: 0,
-    name: "",
-    bonds:{},
-    
+function createAtom(){
+    return {
+        xPos: 0,
+        yPos: 0,
+        name: "",
+        bonds:{},
+        
+    }
 }
 
 console.log(atom.bonds?.firstBond);
@@ -59,6 +58,7 @@ function getRoundedToSigFigs(x, sigfigs){
         floatPart = Math.round(floatPart);  
         return (intPart * Math.pow(10,scalingFactor) + floatPart)/Math.pow(10,scalingFactor)
     }
+
 }
 
 //console.log(getRoundedToSigFigs(0.34567, 1));
