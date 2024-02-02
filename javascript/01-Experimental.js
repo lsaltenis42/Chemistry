@@ -8,7 +8,7 @@ function Rectangle(width, height) {
             return
         } else {
             console.log("|" + "\u203E".repeat(width) + "|")
-            for (let i = 0; i < height - 2; i++){
+            for (let _ = 0; _ < height - 2; _++){
                 console.log("|" + " ".repeat(width) + "|");
             }
             if (height == 1){
