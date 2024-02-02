@@ -9,7 +9,7 @@ function createAtom(radius){
     }
 }
 
-atom1 = createAtom();
+atom1 = createAtom(2);
 
 console.log(atom.bonds?.firstBond);
 
