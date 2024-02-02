@@ -1,15 +1,15 @@
-function createAtom(radius){
-    return {
-        radius:radius,
+
+atom = {
+        constructor: function(radius){
+            this.radius
+        },
         xPos: 0,
         yPos: 0,
         name: "",
-        bonds:{},
-        
-    }
+        bonds:{}, 
 }
 
-atom1 = createAtom(2);
+myAtom  = new atom
 
 console.log(atom.bonds?.firstBond);
 
