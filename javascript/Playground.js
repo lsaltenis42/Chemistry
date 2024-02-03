@@ -1,28 +1,15 @@
-function Rectangle(width, height) {
-    this.width;
-    this.height;
+let pi = 0;
+let iterations = 0;
 
-    this.draw = function () {
-        if (width < 1 || height < 1){
-            console.log("Invalid dimensions!")
-            return
-        } else {
-            console.log("|" + "\u203E".repeat(width) + "|")
-            for (let _ = 0; _ < height - 2; _++){
-                console.log("|" + " ".repeat(width) + "|");
-            }
-            if (height == 1){
-                console.log(" " + "\u203E".repeat(width) + " ")
-            } else {
-                console.log("|" + "\u005F".repeat(width) + "|")
-            }
-            
-        }
+function calculatePi(n){
+    n = (-1)**iterations*(2*iterations + 1);
+    pi += 1/n;
+    iterations ++;
+    if (iterations < 10000){
+        calculatePi(n);
     }
+    
+    return 4*pi;
 }
 
-const Rectangle1 = new Rectangle(1, 1);
-const Rectangle2 = new Rectangle(2, 2);
-
-Rectangle1.draw();
-Rectangle2.draw();
+console.log(`Calculated pi: ${calculatePi(0)} \nActual pi: ${Math.PI}`);
