@@ -1,7 +1,6 @@
 function getPrime(n){
     let primes = []; 
     let i = 1;
-    let nInput = n; 
 
     while (n > 1 && i <= n) {
         while (n % i == 0) {
