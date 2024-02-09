@@ -8,8 +8,10 @@ for(let i = 0; i <= 100; i++){
 
 function getProduct(x,y){
     let product = []; 
-    for(let j = 0; j <= String(x).length;){
-
+    for(let j = 0; j <= String(x).length; j++){
+        for(let k = 0; k <= String(y).length; k++){
+            
+        }
     }
     return product
 }
